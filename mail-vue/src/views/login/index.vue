@@ -237,13 +237,22 @@ const loginOpacity = computed(() => {
 })
 
 const background = computed(() => {
+  const bg = settingStore.settings.background
 
-  return settingStore.settings.background ? {
-    'background-image': `url(${cvtR2Url(settingStore.settings.background)})`,
-    'background-repeat': 'no-repeat',
-    'background-size': 'cover',
-    'background-position': 'center'
-  } : ''
+  if (!bg) return ''
+
+  const bgUrl = cvtR2Url(bg)
+
+  return {
+    'background-image': `
+      radial-gradient(rgba(0,0,0,.4), rgba(0,0,0,.6)),
+      radial-gradient(rgba(0,0,0,0) 33%, rgba(0,0,0,.6) 166%),
+      url(${bgUrl})
+    `,
+    'background-repeat': 'no-repeat, no-repeat, no-repeat',
+    'background-size': 'cover, cover, cover',
+    'background-position': 'center, center, center'
+  }
 })
 
 const openSelect = () => {
